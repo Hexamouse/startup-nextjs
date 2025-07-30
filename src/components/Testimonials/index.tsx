@@ -5,29 +5,56 @@ import SingleTestimonial from "./SingleTestimonial";
 const testimonialData: Testimonial[] = [
   {
     id: 1,
-    name: "Musharof Chy",
-    designation: "Founder @TailGrids",
+    name: "Alicia Putri",
+    designation: "Student @Informatika UNPAD",
     content:
-      "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
-    image: "/images/testimonials/auth-01.png",
+      "EduCraft AI membantu saya belajar lebih efisien. Setiap materi disesuaikan dengan kecepatan saya, dan fitur real-time feedback-nya sangat membantu dalam memperbaiki kesalahan.",
+    image: "https://mighty.tools/mockmind-api/content/human/125.jpg",
     star: 5,
   },
   {
     id: 2,
-    name: "Devid Weilium",
-    designation: "Founder @UIdeck",
+    name: "Rahmat Hidayat",
+    designation: "Lecturer @ITS",
     content:
-      "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
-    image: "/images/testimonials/auth-02.png",
+      "Platform ini sangat membantu saya dalam memantau perkembangan mahasiswa. Analitik yang disediakan membuat evaluasi jadi lebih mudah dan terukur.",
+    image: "https://mighty.tools/mockmind-api/content/human/80.jpg",
     star: 5,
   },
   {
     id: 3,
-    name: "Lethium Frenci",
-    designation: "Founder @Lineicons",
+    name: "Jessica Lestari",
+    designation: "UX Designer @EduPlatform",
     content:
-      "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
-    image: "/images/testimonials/auth-03.png",
+      "Saya suka dengan tampilan EduCraft AI yang bersih dan intuitif. Sangat memudahkan navigasi, baik untuk pelajar maupun tenaga pengajar.",
+    image: "https://mighty.tools/mockmind-api/content/human/124.jpg",
+    star: 5,
+  },
+  {
+    id: 4,
+    name: "Aditya Pratama",
+    designation: "Head of Product @Ruangguru",
+    content:
+      "Integrasi AI dari EduCraft sangat relevan dengan visi kami. Personalisasi pembelajaran berbasis data membantu meningkatkan engagement siswa secara signifikan.",
+    image: "https://mighty.tools/mockmind-api/content/human/90.jpg",
+    star: 5,
+  },
+  {
+    id: 5,
+    name: "Mira Andiani",
+    designation: "Content Lead @Zenius",
+    content:
+      "EduCraft AI mendukung kami dalam menyusun kurikulum yang lebih interaktif. Sistem adaptifnya memudahkan kami mengukur efektivitas materi secara real-time.",
+    image: "https://mighty.tools/mockmind-api/content/human/107.jpg",
+    star: 5,
+  },
+  {
+    id: 6,
+    name: "Bobby Gunawan",
+    designation: "Learning Strategist @Quipper",
+    content:
+      "Dengan platform EduCraft, kami bisa menggabungkan metode pembelajaran konvensional dengan AI-driven assessment yang membuat proses belajar jadi lebih menarik.",
+    image: "https://mighty.tools/mockmind-api/content/human/57.jpg",
     star: 5,
   },
 ];
@@ -37,8 +64,8 @@ const Testimonials = () => {
     <section className="dark:bg-bg-color-dark bg-gray-light relative z-10 py-16 md:py-20 lg:py-28">
       <div className="container">
         <SectionTitle
-          title="What Our Users Says"
-          paragraph="There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form."
+          title="Dipercaya oleh Pendidik & Platform Pembelajaran"
+          paragraph="EduCraft AI telah dipercaya oleh institusi pendidikan dan platform besar untuk menghadirkan pengalaman belajar terbaik bagi semua kalangan."
           center
         />
 

@@ -3,8 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import * as LucideIcons from "lucide-react"; // Import all Lucide icons
+import { LucideProps } from "lucide-react"; // Import LucideProps for typing
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
+import { ComponentType } from "react"; // Import ComponentType for proper typing
 
 const Header = () => {
   // Navbar toggle
@@ -24,7 +27,8 @@ const Header = () => {
   };
   useEffect(() => {
     window.addEventListener("scroll", handleStickyNavbar);
-  });
+    return () => window.removeEventListener("scroll", handleStickyNavbar);
+  }, []);
 
   // submenu handler
   const [openIndex, setOpenIndex] = useState(-1);
@@ -38,12 +42,17 @@ const Header = () => {
 
   const usePathName = usePathname();
 
+  // Function to dynamically get the Lucide icon component
+  const getIconComponent = (iconName: string): ComponentType<LucideProps> => {
+    return (LucideIcons[iconName as keyof typeof LucideIcons] as ComponentType<LucideProps>) || LucideIcons.Info;
+  };
+
   return (
     <>
       <header
-        className={`header top-0 left-0 z-40 flex w-full items-center ${
+        className={`header top-0 left-0 z-40 flex w-full items-center transition-all duration-300 ${
           sticky
-            ? "dark:bg-gray-dark dark:shadow-sticky-dark shadow-sticky fixed z-9999 bg-white/80 backdrop-blur-xs transition"
+            ? "fixed z-50 bg-white/10 dark:bg-gray-dark/10 backdrop-blur-md shadow-sticky dark:shadow-sticky-dark"
             : "absolute bg-transparent"
         }`}
       >
@@ -57,17 +66,17 @@ const Header = () => {
                 } `}
               >
                 <Image
-                  src="/images/logo/logo-2.svg"
+                  src="/images/logo/educraft.png"
                   alt="logo"
-                  width={140}
-                  height={30}
+                  width={120}
+                  height={10}
                   className="w-full dark:hidden"
                 />
                 <Image
-                  src="/images/logo/logo.svg"
+                  src="/images/logo/educraft.png"
                   alt="logo"
-                  width={140}
-                  height={30}
+                  width={120}
+                  height={10}
                   className="hidden w-full dark:block"
                 />
               </Link>
@@ -110,12 +119,20 @@ const Header = () => {
                         {menuItem.path ? (
                           <Link
                             href={menuItem.path}
-                            className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
+                            className={`flex items-center py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
                               usePathName === menuItem.path
                                 ? "text-primary dark:text-white"
                                 : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
                             }`}
                           >
+                            {menuItem.icon && (
+                              <span className="mr-2">
+                                {(() => {
+                                  const IconComponent = getIconComponent(menuItem.icon);
+                                  return <IconComponent className="h-5 w-5" />;
+                                })()}
+                              </span>
+                            )}
                             {menuItem.title}
                           </Link>
                         ) : (
@@ -124,6 +141,14 @@ const Header = () => {
                               onClick={() => handleSubmenu(index)}
                               className="text-dark group-hover:text-primary flex cursor-pointer items-center justify-between py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 dark:text-white/70 dark:group-hover:text-white"
                             >
+                              {menuItem.icon && (
+                                <span className="mr-2">
+                                  {(() => {
+                                    const IconComponent = getIconComponent(menuItem.icon);
+                                    return <IconComponent className="h-5 w-5" />;
+                                  })()}
+                                </span>
+                              )}
                               {menuItem.title}
                               <span className="pl-3">
                                 <svg width="25" height="24" viewBox="0 0 25 24">
@@ -141,12 +166,20 @@ const Header = () => {
                                 openIndex === index ? "block" : "hidden"
                               }`}
                             >
-                              {menuItem.submenu.map((submenuItem, index) => (
+                              {menuItem.submenu?.map((submenuItem, index) => (
                                 <Link
                                   href={submenuItem.path}
                                   key={index}
-                                  className="text-dark hover:text-primary block rounded-sm py-2.5 text-sm lg:px-3 dark:text-white/70 dark:hover:text-white"
+                                  className="text-dark hover:text-primary flex items-center rounded-sm py-2.5 text-sm lg:px-3 dark:text-white/70 dark:hover:text-white"
                                 >
+                                  {submenuItem.icon && (
+                                    <span className="mr-2">
+                                      {(() => {
+                                        const IconComponent = getIconComponent(submenuItem.icon);
+                                        return <IconComponent className="h-5 w-5" />;
+                                      })()}
+                                    </span>
+                                  )}
                                   {submenuItem.title}
                                 </Link>
                               ))}

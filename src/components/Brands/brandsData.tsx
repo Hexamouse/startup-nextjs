@@ -3,17 +3,17 @@ import { Brand } from "@/types/brand";
 const brandsData: Brand[] = [
   {
     id: 6,
-    name: "Formbold",
-    href: "https://formbold.com",
-    image: "/images/brands/formbold.svg",
-    imageLight: "/images/brands/formbold-light.svg",
+    name: "RuangGuru",
+    href: "https://ruangguru.com",
+    image: "/images/logo/RuangGuru_Logo.png",
+    imageLight: "/images/logo/RuangGuru_Light_Logo.png",
   },
   {
     id: 1,
-    name: "UIdeck",
+    name: "Zenius",
     href: "https://uideck.com",
     image: "/images/brands/uideck.svg",
-    imageLight: "/images/brands/uideck-light.svg",
+    imageLight: "/images/logo/Zenius_Light_Logo.png",
   },
   {
     id: 2,

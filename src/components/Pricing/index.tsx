@@ -1,105 +1,129 @@
 "use client";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import SectionTitle from "../Common/SectionTitle";
 import OfferList from "./OfferList";
 import PricingBox from "./PricingBox";
 
-const Pricing = () => {
+interface PricingProps {
+  children?: ReactNode;
+}
+
+const formatRupiah = (number: number) => {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+  }).format(number);
+};
+
+const Pricing = ({ children }: PricingProps) => {
   const [isMonthly, setIsMonthly] = useState(true);
+
+  const plans = [
+    {
+      packageName: "Starter",
+      priceMonthly: 99000,
+      priceYearly: 899000,
+      subtitle:
+        "Untuk pelajar yang ingin belajar mandiri dengan bantuan AI personal assistant.",
+      offers: [
+        { text: "Asisten Pembelajaran AI", status: "active" },
+        { text: "Kuis Interaktif", status: "active" },
+        { text: "Pelacak Kemajuan Dasar", status: "active" },
+        { text: "Bimbingan Belajar AI Terbatas (10x/bln)", status: "active" },
+        { text: "Akses Kelas Langsung", status: "inactive" },
+        { text: "Jalur Pembelajaran Khusus", status: "inactive" },
+      ],
+    },
+    {
+      packageName: "Pro",
+      priceMonthly: 199000,
+      priceYearly: 1599000,
+      subtitle:
+        "Paket lengkap dengan akses kelas live & konsultasi AI Tutor tak terbatas.",
+      offers: [
+        { text: "Asisten Pembelajaran AI", status: "active" },
+        { text: "Bimbingan Belajar AI Tanpa Batas", status: "active" },
+        { text: "Dasbor Kemajuan & Analisis", status: "active" },
+        { text: "Akses Kelas Langsung", status: "active" },
+        { text: "jalur Pembelajaran Khusus", status: "active" },
+        { text: "Pemantauan Orang Tua", status: "inactive" },
+      ],
+    },
+    {
+      packageName: "Ultra",
+      priceMonthly: 499000,
+      priceYearly: 3999000,
+      subtitle:
+        "Solusi menyeluruh untuk sekolah & lembaga pendidikan berbasis AI.",
+      offers: [
+        { text: "Asisten AI untuk Institusi", status: "active" },
+        { text: "Pembuat Konten AI Khusus", status: "active" },
+        { text: "Panel Admin & Guru", status: "active" },
+        { text: "Akses Pemantauan Orang Tua", status: "active" },
+        { text: "Dukungan Khusus", status: "active" },
+        { text: "Rangkaian Analisis Institusional", status: "active" },
+      ],
+    },
+  ];
 
   return (
     <section id="pricing" className="relative z-10 py-16 md:py-20 lg:py-28">
       <div className="container">
         <SectionTitle
-          title="Simple and Affordable Pricing"
-          paragraph="There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form."
+          title="Educraft AI Pricing Plans"
+          paragraph="Pilih paket yang sesuai untuk menunjang proses belajar lebih interaktif, personal, dan cerdas dengan dukungan AI."
           center
           width="665px"
         />
 
-        <div className="w-full">
-          <div className="mb-8 flex justify-center md:mb-12 lg:mb-16">
-            <span
-              onClick={() => setIsMonthly(true)}
-              className={`${
-                isMonthly
-                  ? "pointer-events-none text-primary"
-                  : "text-dark dark:text-white"
-              } mr-4 cursor-pointer text-base font-semibold`}
-            >
-              Monthly
-            </span>
-            <div
-              onClick={() => setIsMonthly(!isMonthly)}
-              className="flex cursor-pointer items-center"
-            >
-              <div className="relative">
-                <div className="h-5 w-14 rounded-full bg-[#1D2144] shadow-inner"></div>
-                <div
-                  className={`${
-                    isMonthly ? "" : "translate-x-full"
-                  } shadow-switch-1 absolute left-0 top-[-4px] flex h-7 w-7 items-center justify-center rounded-full bg-primary transition`}
-                >
-                  <span className="active h-4 w-4 rounded-full bg-white"></span>
-                </div>
-              </div>
-            </div>
-            <span
-              onClick={() => setIsMonthly(false)}
-              className={`${
-                isMonthly
-                  ? "text-dark dark:text-white"
-                  : "pointer-events-none text-primary"
-              } ml-4 cursor-pointer text-base font-semibold`}
-            >
-              Yearly
-            </span>
-          </div>
-        </div>
+        {/* <div className="flex justify-center mb-10">
+          <button
+            onClick={() => setIsMonthly(true)}
+            className={`px-4 py-2 border rounded-l-lg ${
+              isMonthly ? "bg-blue-600 text-white" : "bg-white text-gray-700"
+            }`}
+          >
+            Bulanan
+          </button>
+          <button
+            onClick={() => setIsMonthly(false)}
+            className={`px-4 py-2 border rounded-r-lg ${
+              !isMonthly ? "bg-blue-600 text-white" : "bg-white text-gray-700"
+            }`}
+          >
+            Tahunan
+          </button>
+        </div> */}
 
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-          <PricingBox
-            packageName="Lite"
-            price={isMonthly ? "40" : "120"}
-            duration={isMonthly ? "mo" : "yr"}
-            subtitle="Lorem ipsum dolor sit amet adiscing elit Mauris egestas enim."
-          >
-            <OfferList text="All UI Components" status="active" />
-            <OfferList text="Use with Unlimited Projects" status="active" />
-            <OfferList text="Commercial Use" status="active" />
-            <OfferList text="Email Support" status="active" />
-            <OfferList text="Lifetime Access" status="inactive" />
-            <OfferList text="Free Lifetime Updates" status="inactive" />
-          </PricingBox>
-          <PricingBox
-            packageName="Basic"
-            price={isMonthly ? "399" : "789"}
-            duration={isMonthly ? "mo" : "yr"}
-            subtitle="Lorem ipsum dolor sit amet adiscing elit Mauris egestas enim."
-          >
-            <OfferList text="All UI Components" status="active" />
-            <OfferList text="Use with Unlimited Projects" status="active" />
-            <OfferList text="Commercial Use" status="active" />
-            <OfferList text="Email Support" status="active" />
-            <OfferList text="Lifetime Access" status="active" />
-            <OfferList text="Free Lifetime Updates" status="inactive" />
-          </PricingBox>
-          <PricingBox
-            packageName="Plus"
-            price={isMonthly ? "589" : "999"}
-            duration={isMonthly ? "mo" : "yr"}
-            subtitle="Lorem ipsum dolor sit amet adiscing elit Mauris egestas enim."
-          >
-            <OfferList text="All UI Components" status="active" />
-            <OfferList text="Use with Unlimited Projects" status="active" />
-            <OfferList text="Commercial Use" status="active" />
-            <OfferList text="Email Support" status="active" />
-            <OfferList text="Lifetime Access" status="active" />
-            <OfferList text="Free Lifetime Updates" status="active" />
-          </PricingBox>
+          {plans.map((plan) => (
+            <PricingBox
+              key={plan.packageName}
+              packageName={plan.packageName}
+              price={
+                isMonthly
+                  ? formatRupiah(plan.priceMonthly)
+                  : formatRupiah(plan.priceYearly)
+              }
+              duration={isMonthly ? "bln" : "thn"}
+              subtitle={plan.subtitle}
+            >
+              {plan.offers.map((offer, idx) => (
+                <OfferList
+                  key={idx}
+                  text={offer.text}
+                  status={offer.status as "active" | "inactive"}
+                />
+              ))}
+            </PricingBox>
+          ))}
         </div>
+
+        {children && children} {/* <-- Ini tempat untuk children yang dipanggil dari page.tsx */}
       </div>
 
+      {/* Background SVG */}
       <div className="absolute bottom-0 left-0 z-[-1]">
         <svg
           width="239"
